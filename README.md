@@ -23,7 +23,7 @@ import sounddevice as SD
 import numpy as NP
 import soundfile as SF
 
-// see requirements.txt
+// see requirements.txt NOT ALL are actually required by minimum, this is just my personal setup
 
 # Usage
 When everything mentioned earlier is setup (preferrably in the latest version found in the requirements / listed here),
