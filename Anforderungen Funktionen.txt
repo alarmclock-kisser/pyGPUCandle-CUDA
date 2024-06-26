@@ -1,0 +1,36 @@
+Wir brauchen ein Programm, wie folgt:
+
+load_audio_from_clipboard(bool:logging=False) als Funktion:
+- soll Audacity-Auswahl-Kopie in der Zwischenablage entgegennehmen (ist ein String)
+- soll samplerate erkennen
+- soll Audio-Tensor und samplerate zurückgeben
+
+stretch_tensor(Tensor:tensor, int:samplerate=48000, float:factor=1.000, logging=False) als Funktion:
+- soll tensor, samplerate, factor entgegennehmen
+- soll mit torchaudio functional.time_stretch den Tensor um factor strecken
+- Ergebnis Tensor und samplerate zurückgeben
+
+main(int:factor=1.000, bool:logging=False) als Funktion:
+- bricht frühzeitig mit return ab, wenn nichts in der Zwischenablage ist
+- lädt Audio-Tensor (=ten) und zugehörige samplerate (=sam) mit load_audio_from_clipboard()
+- streckt geladenen Audio-Tensor mit ten, sam = stretch_tensor(ten, sam, factor)
+- verarbeitet Ergebnis-Tensor und Ergebnis-samplerate so, dass es kompatibel mit Audacity ist
+- legt Ergebnis in der Zwischenablage ab, sodass man es in Audacity dann mit Ctrl. + V einfügen kann
+
+if __name__ == "__main__":
+- nimmt optionale Argumente entweder (initbpm, goalbpm) XOR (factor) direkt XOR keine Aufrufargumente entgegen. entgegen
+- fragt initiale BPM und Ziel-BPM ab, woraus der Streckfaktor FAC berechnet wird.
+
+Bedingungen / Anwendung:
++ Man wählt zuerst in Audacity einen Bereich mit dem Auswahlwerkzeug aus
++ dieser wird dann mit (Strg. + C) in die Zwischenablage kopiert
++ sobald man das Python Programm startet (F5 in IDLE) oder Aufruft durch CMD (python3)
+	+ Zwischenablage entgegennehmen
+	+ Eingabewerte zu factor oder BPM jeweils abfragen
+	+ Audiodaten mit Eingabe verarbeiten
+	+ Ausgabe des Ergebnisses in Zwischenablage
++ in Audacity soll man nun (Strg. + V) drücken, um den Bearbeiteten Audio-Clip an beliebiger Stelle einzufügen
+
+Hinweise:
++ Wenn man was in Audacity auswählt und dann kopiert, ist es wohl 'str' vom Datentyp 
++ 'bytes-like object' wird erwartet, wenn man aus der Zwischenablage mit bspw. librosa.load macht
