@@ -1,6 +1,6 @@
 # pyGPUCandle-CUDA
 Python (3.11) script for stretching audio on CUDA (GPU), if drivers and environment are set up correctly. Otherwise on CPU, being way slower. Using pytorch-tensors. 
-
+Documentation (+ comments) are mostly made in German, final releases will be English.
 # About
 This is V155 (english language release),
 published on June 24th 2024.
